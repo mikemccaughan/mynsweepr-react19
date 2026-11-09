@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { BoardProps } from "../models/board";
 import Cell from "./cell";
 import "./board.css";
 
 export function Board(props: BoardProps) {
-    const [board, _setBoard] = useState(props.board);
-
     return (
       <div className="board">
+        {!props && <div className="loading">Loading...</div>}
+        {!props?.board && <div className="loading">Loading...</div>}
+        {!props?.board?.cells?.length && <div className="loading">Loading...</div>}
         {
-            board?.cells?.map((cell, index) => 
+            props?.board?.cells?.map((cell, index) => 
                 {
                     const r = cell.row;
                     const c = cell.col;
@@ -23,7 +24,7 @@ export function Board(props: BoardProps) {
                                 flagged={cell.flagged}
                                 value={cell.value}
                                 isMine={cell.isMine}
-                                board={board}
+                                board={props.board ?? undefined}
                             />
                         </div>
                     )

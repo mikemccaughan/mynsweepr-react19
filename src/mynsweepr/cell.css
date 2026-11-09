@@ -19,9 +19,101 @@ button.cell.nearby-0:not(.hidden) {
     border-color: aliceblue;
     color: aliceblue;
 }
-button.cell.nearby-3, button.cell.nearby-26 {
+button:is(
+    .nearby-1, 
+    .nearby-2, 
+    .nearby-3, 
+    .nearby-4, 
+    .nearby-5, 
+    .nearby-6, 
+    .nearby-7, 
+    .nearby-8, 
+    .nearby-9,
+    .nearby-10, 
+    .nearby-11, 
+    .nearby-12, 
+    .nearby-13, 
+    .nearby-14, 
+    .nearby-15,
+    .nearby-16, 
+    .nearby-17, 
+    .nearby-18, 
+    .nearby-19, 
+    .nearby-20, 
+    .nearby-21, 
+    .nearby-22, 
+    .nearby-23, 
+    .nearby-24, 
+    .nearby-25, 
+    .nearby-26, 
+    .nearby-27, 
+    .nearby-28, 
+    .nearby-29
+ ).cell {
+    &:not(.hidden):not(.flagged) {
+        &::before {
+            content: attr(data-nearby); 
+            color: contrast-color(red);
+        }
+    }
+}
+button:is(
+    .nearby-5, 
+    .nearby-6, 
+    .nearby-7, 
+    .nearby-8, 
+    .nearby-9,
+    .nearby-10, 
+    .nearby-11, 
+    .nearby-12, 
+    .nearby-13, 
+    .nearby-14, 
+    .nearby-15,
+    .nearby-16, 
+    .nearby-17, 
+    .nearby-18, 
+    .nearby-19, 
+    .nearby-20, 
+    .nearby-21, 
+    .nearby-22, 
+    .nearby-23, 
+    .nearby-24, 
+    .nearby-25, 
+    .nearby-26, 
+    .nearby-27, 
+    .nearby-28, 
+    .nearby-29
+ ).cell {
     &:not(.hidden):not(.flagged) {
         background: radial-gradient(red, darkred);
         border-color: red;
+    }
+}
+button:is(.nearby-4).cell {
+    &:not(.hidden):not(.flagged) {
+        background: radial-gradient(orange, darkorange);
+        border-color: orange;
+        color: contrast-color(orange);
+    }
+}
+button:is(.nearby-3).cell {
+    &:not(.hidden):not(.flagged) {
+        background: radial-gradient(yellow, gold);
+        border-color: yellow;
+        color: contrast-color(yellow);
+    }
+}
+button:is(.nearby-2).cell {
+    &:not(.hidden):not(.flagged) {
+        background: radial-gradient(blue, darkblue);
+        border-color: blue;
+        color: contrast-color(blue);
+    }
+}
+button:is(.nearby-1).cell {
+    &:not(.hidden):not(.flagged) {
+        background: radial-gradient(green, darkgreen);
+        border-color: green;
+        color: contrast-color(green);
     }
 }

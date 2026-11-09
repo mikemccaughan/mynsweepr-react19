@@ -46,7 +46,11 @@ export class Preboard extends Array<Array<number>> {
      * and each value represents a cell in that row. The values are either less than 0 (indicating
      * a mine) or greater than or equal to 0 (indicating the number of mines surrounding that cell).
      */
-    public generatePreboard(width: number = this.cols, height: number = this.rows, density: number = this.density): Preboard {
+    public generatePreboard(
+        width: number = this.cols, 
+        height: number = this.rows, 
+        density: number = this.density
+    ): Preboard {
         let mineCount = Math.floor(width * height * density);
         let value = -(mineCount * 2);
         for (let i = 0; i < mineCount; i++) {
