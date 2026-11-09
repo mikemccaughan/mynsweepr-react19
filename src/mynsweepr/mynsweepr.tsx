@@ -10,7 +10,7 @@ function Mynsweepr() {
   const [rows, setRows] = useState(9);
   const [cols, setCols] = useState(9);
   const [density, _setDensity] = useState(1/6); // 0.166667% density
-  const [_mines, setMines] = useState(Math.floor(rows * cols * density));
+  const [mines, setMines] = useState(Math.floor(rows * cols * density));
   const [isCustom, setIsCustom] = useState(false);
   const [board, setBoard] = useState<Board | null>(null);
   const [isGameOver, setIsGameOver] = useState(false);
@@ -19,13 +19,13 @@ function Mynsweepr() {
   const setSize = (height: number, width: number) => {
     setRows(height);
     setCols(width);
-    const isStandard = (
-        (height === 9  && width === 9 ) || 
-        (height === 16 && width === 16) ||
-        (height === 16 && width === 30)
-    );
-    const isCustom = !isStandard;
-    setIsCustom(isCustom);
+//    const isStandard = (
+//        (height === 9  && width === 9 ) || 
+//        (height === 16 && width === 16) ||
+//        (height === 16 && width === 30)
+//    );
+//    const isCustom = !isStandard;
+//    setIsCustom(isCustom);
     setMines(Math.floor(height * width * density));
     let pre = new Preboard(width, height, density);
     setBoard(new Board(pre.generatePreboard()));
@@ -37,8 +37,9 @@ function Mynsweepr() {
   }
 
   if (!board) {
-    console.log('Board is not initialized');
+    console.warn('Board is not initialized');
     setSize(9, 9);
+    console.log('Board is initialized');
   }
 
   return (
@@ -54,10 +55,11 @@ function Mynsweepr() {
                     id="size-small"
                     name="size"
                     value="small"
-                    checked={rows === 9 && cols === 9}
+                    checked={!isCustom && rows === 9 && cols === 9}
                     onChange={() => {
                         console.log('Small selected');
                         setSize(9, 9);
+                        setIsCustom(false);
                     }}
                 />
             </div>
@@ -68,10 +70,11 @@ function Mynsweepr() {
                     id="size-medium"
                     name="size"
                     value="medium"
-                    checked={rows === 16 && cols === 16}
+                    checked={!isCustom && rows === 16 && cols === 16}
                     onChange={() => {
                         console.log('Medium selected');
                         setSize(16, 16);
+                        setIsCustom(false);
                     }}
                 />
             </div>
@@ -82,10 +85,11 @@ function Mynsweepr() {
                     id="size-large"
                     name="size"
                     value="large"
-                    checked={rows === 16 && cols === 30}
+                    checked={!isCustom && rows === 16 && cols === 30}
                     onChange={() => {
                         console.log('Large selected');
                         setSize(16, 30);
+                        setIsCustom(false);
                     }}
                 />
             </div>
@@ -100,6 +104,7 @@ function Mynsweepr() {
                     onChange={() => {
                         console.log('Custom selected');
                         setSize(rows, cols);
+                        setIsCustom(true);
                     }}
                 />
             </div>
@@ -113,10 +118,11 @@ function Mynsweepr() {
                     id="rows"
                     value={rows}
                     onChange={(e) => {
-                        console.log('Rows changed');
-                        setRows(parseInt(e.target.value));
-                        setMines(Math.floor(rows * cols * density));
-                        let pre = new Preboard(cols, rows, density);
+                        const newRows = parseInt(e.target.value);
+                        console.log('Rows changed to', newRows);
+                        setRows(newRows);
+                        setMines(Math.floor(newRows * cols * density));
+                        let pre = new Preboard(cols, newRows, density);
                         setBoard(new Board(pre.generatePreboard()));
                     }}
                 />
@@ -128,12 +134,34 @@ function Mynsweepr() {
                     id="cols"
                     value={cols}
                     onChange={(e) => {
-                        console.log('Cols changed');
-                        setCols(parseInt(e.target.value));
-                        setMines(Math.floor(rows * cols * density));
-                        let pre = new Preboard(cols, rows, density);
+                        const newCols = parseInt(e.target.value);
+                        console.log('Cols changed to', newCols);
+                        setCols(newCols);
+                        setMines(Math.floor(rows * newCols * density));
+                        let pre = new Preboard(newCols, rows, density);
                         setBoard(new Board(pre.generatePreboard()));
                     }}
+                />
+            </div>
+        </fieldset>
+        <fieldset className='score-fieldset'>
+            <legend>Score</legend>
+            <div className='fieldset'>
+                <label htmlFor='time'>Time:</label>
+                <input
+                    type='text'
+                    id='time'
+                    value='00:00'
+                    readOnly
+                />
+            </div>
+            <div className='fieldset'>
+                <label htmlFor='mines'>Mines:</label>
+                <input
+                    type='text'
+                    id='mines'
+                    value={mines}
+                    readOnly
                 />
             </div>
         </fieldset>
@@ -142,7 +170,8 @@ function Mynsweepr() {
             setSize(rows, cols);
         }}>Start Game</button>
         <button className='reset-button' type='button' onClick={() => {
-            console.log('Reset game');
+            console.log('Reset game', board);
+            setBoard(null);
             setBoard(board);
         }}>Reset Game</button>
       </div>

@@ -1,15 +1,13 @@
 {
     "compilerOptions": {
         "jsx": "react",
-        "allowJs": true,
-        "checkJs": true,
-        "lib": [
-            "DOM",
-            "ESNext"
-        ],
-        "target": "ESNext",
-        "module": "ESNext",
-        "moduleResolution": "bundler"
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitAny": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "removeComments": true,
+        "sourceMap": true,
+        "strict": true
     },
     "files": [
         "src/**/*.ts",

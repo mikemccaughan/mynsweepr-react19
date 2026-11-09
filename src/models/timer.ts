@@ -14,7 +14,6 @@ export class Timer {
     }
 
     public start(): void {
-        if (this._intervalId) return;
         this._startTime = Date.now() - this._elapsedTime;
         this._intervalId = setInterval(() => {
             this._elapsedTime = Date.now() - this._startTime;
