@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "composite": true,
+    "noEmit": false,
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
     "target": "es2023",
     "lib": [
@@ -10,7 +11,6 @@
       "node"
     ],
     "skipLibCheck": true,
-    "noEmit": false,
     /* Bundler mode */
     "module": "nodenext",
     "allowImportingTsExtensions": true,
