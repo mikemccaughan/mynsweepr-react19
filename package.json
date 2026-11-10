@@ -1,13 +1,13 @@
 {
   "name": "mynsweepr-react19",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "yarn dlx vite",
     "start": "yarn dlx vite",
     "build": "yarn dlx vite build",
-    "build:deploy": "yarn set version latest && yarn dlx npm-check-updates -u && yarn install && yarn dlx update-browserslist-db && yarn dlx vite build --base=/mynsweeper-react19/",
+    "build:deploy": "yarn set version latest && yarn dlx npm-check-updates -u && yarn install && yarn dlx update-browserslist-db && yarn node vite build --base=/mynsweeper-react19/",
     "lint": "eslint .",
     "preview": "yarn dlx vite preview"
   },
