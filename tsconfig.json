@@ -9,10 +9,7 @@
         "sourceMap": true,
         "strict": true
     },
-    "files": [
-        "src/**/*.ts",
-        "src/**/*.tsx"
-    ],
+    "files": [],
     "references": [
         {
             "path": "./tsconfig.app.json"
